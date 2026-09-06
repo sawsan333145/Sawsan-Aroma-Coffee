@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ساعة عالمية - Global Digital Clock | Sawsan Aroma Coffee</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #8B4513;
+            --secondary-color: #D2691E;
+            --accent-color: #FFA500;
+            --dark-color: #2F1810;
+            --light-color: #F5E6D3;
+            --white: #FFFFFF;
+            --gray: #E8E8E8;
+            --text-dark: #333333;
+            --text-light: #666666;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--dark-color) 0%, #5D3A1A 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            color: var(--white);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: slideDown 0.6s ease;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: var(--light-color);
+        }
+
+        /* Controls Section */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            animation: slideDown 0.8s ease;
+        }
+
+        .controls input {
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--accent-color);
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            font-size: 1rem;
+        }
+
+        .controls input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .controls input:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: #FF8C00;
+        }
+
+        .controls button {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .controls button:hover {
+            background-color: #FF8C00;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 165, 0, 0.4);
+        }
+
+        .controls select {
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--accent-color);
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .controls select option {
+            background-color: var(--dark-color);
+            color: var(--white);
+        }
+
+        /* Format Toggle */
+        .format-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            animation: slideDown 1s ease;
+        }
+
+        .format-btn {
+            padding: 0.6rem 1.2rem;
+            background-color: rgba(255, 165, 0, 0.2);
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .format-btn.active {
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+        }
+
+        .format-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Clocks Grid */
+        .clocks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .clock-card {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.3) 0%, rgba(210, 105, 30, 0.2) 100%);
+            border: 2px solid var(--accent-color);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(255, 165, 0, 0.2);
+            animation: slideUp 0.6s ease;
+        }
+
+        .clock-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .clock-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(255, 165, 0, 0.4);
+            border-color: #FF8C00;
+        }
+
+        .clock-card:hover::before {
+            left: 100%;
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: #FF4444;
+            color: var(--white);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .remove-btn:hover {
+            background-color: #FF1111;
+            transform: scale(1.1);
+        }
+
+        .timezone-name {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Analog Clock */
+        .analog-clock {
+            width: 180px;
+            height: 180px;
+            border: 4px solid var(--accent-color);
+            border-radius: 50%;
+            margin: 1.5rem auto;
+            position: relative;
+            background: radial-gradient(circle at center, rgba(255, 165, 0, 0.1), rgba(139, 69, 19, 0.2));
+            box-shadow: inset 0 0 15px rgba(255, 165, 0, 0.2);
+        }
+
+        .clock-center {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom center;
+            border-radius: 10px;
+        }
+
+        .hour-hand {
+            width: 7px;
+            height: 45px;
+            background: var(--accent-color);
+            margin-left: -3.5px;
+        }
+
+        .minute-hand {
+            width: 5px;
+            height: 60px;
+            background: var(--light-color);
+            margin-left: -2.5px;
+        }
+
+        .second-hand {
+            width: 3px;
+            height: 70px;
+            background: #FF4444;
+            margin-left: -1.5px;
+        }
+
+        .clock-number {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            color: var(--accent-color);
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .clock-number span {
+            display: inline-block;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Digital Time */
+        .digital-time {
+            font-size: 2.8rem;
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+
+        /* Time Details */
+        .time-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .detail-item {
+            background: rgba(255, 165, 0, 0.1);
+            padding: 0.8rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .detail-label {
+            font-size: 0.75rem;
+            color: var(--light-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .detail-value {
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-top: 0.3rem;
+        }
+
+        /* Empty State */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem;
+            background: rgba(255, 165, 0, 0.1);
+            border: 2px dashed var(--accent-color);
+            border-radius: 15px;
+            color: var(--light-color);
+            font-size: 1.2rem;
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: var(--light-color);
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 165, 0, 0.3);
+        }
+
+        .footer p {
+            font-size: 0.95rem;
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .clocks-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .controls input,
+            .controls button,
+            .controls select {
+                width: 100%;
+            }
+
+            .digital-time {
+                font-size: 2rem;
+            }
+
+            .analog-clock {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🕐 ساعة عالمية رقمية</h1>
+            <p>Global Digital Clock - عرض الوقت في مناطق زمنية متعددة</p>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <input type="text" id="timezoneInput" placeholder="أدخل المنطقة الزمنية (مثل: Asia/Riyadh)">
+            <button onclick="addTimezone()">إضافة المنطقة الزمنية ➕</button>
+            <select id="presetTimezones" onchange="addPresetTimezone()">
+                <option value="">اختر منطقة زمنية سريعة...</option>
+                <option value="Asia/Riyadh">الرياض - السعودية (AST)</option>
+                <option value="Asia/Dubai">دبي - الإمارات (GST)</option>
+                <option value="Africa/Cairo">القاهرة - مصر (EET)</option>
+                <option value="Asia/Baghdad">بغداد - العراق (AST)</option>
+                <option value="America/New_York">نيويورك - أمريكا (EST)</option>
+                <option value="Europe/London">لندن - بريطانيا (GMT)</option>
+                <option value="Europe/Paris">باريس - فرنسا (CET)</option>
+                <option value="Asia/Tokyo">طوكيو - اليابان (JST)</option>
+                <option value="Australia/Sydney">سيدني - أستراليا (AEDT)</option>
+                <option value="Asia/Singapore">سنغافورة (SGT)</option>
+                <option value="Asia/Bangkok">بانكوك - تايلاند (ICT)</option>
+                <option value="India/Kolkata">كولكاتا - الهند (IST)</option>
+            </select>
+        </div>
+
+        <!-- Format Toggle -->
+        <div class="format-toggle">
+            <button class="format-btn active" onclick="setTimeFormat(24)">24-Hour (24 ساعة)</button>
+            <button class="format-btn" onclick="setTimeFormat(12)">12-Hour (12 ساعة)</button>
+        </div>
+
+        <!-- Clocks Grid -->
+        <div class="clocks-grid" id="clocksGrid">
+            <div class="empty-state">
+                <div class="empty-state-icon">🌍</div>
+                <p>اختر منطقة زمنية لبدء العرض</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem;">Select a timezone to get started!</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>💡 اضف عدة مناطق زمنية لمقارنة الأوقات حول العالم | Add multiple timezones to compare times worldwide!</p>
+            <p style="margin-top: 1rem; font-size: 0.85rem;">متجر سوسن أروما كوفي | Sawsan Aroma Coffee Store © 2024</p>
+        </div>
+    </div>
+
+    <script>
+        let timezones = [];
+        let timeFormat = 24;
+        let animationIds = {};
+
+        // Load default timezones on page load
+        window.addEventListener('load', () => {
+            addTimezone('Asia/Riyadh');
+            addTimezone('America/New_York');
+            addTimezone('Europe/London');
+            addTimezone('Asia/Tokyo');
+        });
+
+        function addTimezone(tz = null) {
+            const timezone = tz || document.getElementById('timezoneInput').value.trim();
+            
+            if (!timezone) {
+                alert('الرجاء إدخال منطقة زمنية! / Please enter a timezone!');
+                return;
+            }
+
+            if (timezones.includes(timezone)) {
+                alert('هذه المنطقة الزمنية مضافة بالفعل! / This timezone is already added!');
+                return;
+            }
+
+            // Validate timezone
+            try {
+                new Date().toLocaleString('ar-SA', { timeZone: timezone });
+                timezones.push(timezone);
+                document.getElementById('timezoneInput').value = '';
+                document.getElementById('presetTimezones').value = '';
+                renderClocks();
+            } catch (err) {
+                alert(`المنطقة الزمنية غير صحيحة: ${timezone} / Invalid timezone: ${timezone}`);
+            }
+        }
+
+        function addPresetTimezone() {
+            const timezone = document.getElementById('presetTimezones').value;
+            if (timezone) {
+                addTimezone(timezone);
+            }
+        }
+
+        function removeTimezone(index) {
+            if (animationIds[index]) {
+                cancelAnimationFrame(animationIds[index]);
+            }
+            timezones.splice(index, 1);
+            renderClocks();
+        }
+
+        function setTimeFormat(format) {
+            timeFormat = format;
+            document.querySelectorAll('.format-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            renderClocks();
+        }
+
+        function renderClocks() {
+            const grid = document.getElementById('clocksGrid');
+            
+            if (timezones.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🌍</div>
+                        <p>اختر منطقة زمنية لبدء العرض</p>
+                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">Select a timezone to get started!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = timezones.map((tz, index) => `
+                <div class="clock-card">
+                    <button class="remove-btn" onclick="removeTimezone(${index})" title="حذف / Remove">✕</button>
+                    <div class="timezone-name">${formatTimezoneName(tz)}</div>
+                    
+                    <div class="analog-clock" id="analog-${index}">
+                        <div class="clock-number" id="numbers-${index}"></div>
+                        <div class="hand hour-hand" id="hour-${index}"></div>
+                        <div class="hand minute-hand" id="minute-${index}"></div>
+                        <div class="hand second-hand" id="second-${index}"></div>
+                        <div class="clock-center"></div>
+                    </div>
+                    
+                    <div class="digital-time" id="digital-${index}"></div>
+                    
+                    <div class="time-details">
+                        <div class="detail-item">
+                            <div class="detail-label">التاريخ / Date</div>
+                            <div class="detail-value" id="date-${index}"></div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">اليوم / Day</div>
+                            <div class="detail-value" id="day-${index}"></div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">فارق UTC / UTC Offset</div>
+                            <div class="detail-value" id="offset-${index}"></div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">الأسبوع / Week</div>
+                            <div class="detail-value" id="week-${index}"></div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Initialize clock numbers
+            timezones.forEach((tz, index) => {
+                drawClockNumbers(index);
+            });
+
+            // Start animation loop
+            updateAllClocks();
+        }
+
+        function drawClockNumbers(index) {
+            const numbersContainer = document.getElementById(`numbers-${index}`);
+            if (!numbersContainer) return;
+
+            numbersContainer.innerHTML = '';
+            for (let i = 1; i <= 12; i++) {
+                const span = document.createElement('span');
+                span.textContent = i;
+                span.style.transform = `rotate(${i * 30}deg) translateY(-65px)`;
+                numbersContainer.appendChild(span);
+            }
+        }
+
+        function updateAllClocks() {
+            timezones.forEach((tz, index) => {
+                updateClock(tz, index);
+            });
+            animationIds[0] = requestAnimationFrame(updateAllClocks);
+        }
+
+        function updateClock(timezone, index) {
+            const now = new Date();
+            const tzTime = new Date(now.toLocaleString('en-US', { timeZone: timezone }));
+
+            // Digital time
+            const hours = tzTime.getHours();
+            const minutes = tzTime.getMinutes();
+            const seconds = tzTime.getSeconds();
+
+            let displayHours = hours;
+            let period = '';
+
+            if (timeFormat === 12) {
+                period = hours >= 12 ? ' PM' : ' AM';
+                displayHours = hours % 12 || 12;
+            }
+
+            const digitalTime = `${pad(displayHours)}:${pad(minutes)}:${pad(seconds)}${period}`;
+            const digitalElement = document.getElementById(`digital-${index}`);
+            if (digitalElement) {
+                digitalElement.textContent = digitalTime;
+            }
+
+            // Analog clock hands
+            const secondDegrees = (seconds / 60) * 360;
+            const minuteDegrees = (minutes / 60) * 360 + (seconds / 60) * 6;
+            const hourDegrees = (hours / 12) * 360 + (minutes / 60) * 30;
+
+            const hourHand = document.getElementById(`hour-${index}`);
+            const minuteHand = document.getElementById(`minute-${index}`);
+            const secondHand = document.getElementById(`second-${index}`);
+
+            if (hourHand) hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+            if (minuteHand) minuteHand.style.transform = `rotate(${minuteDegrees}deg)`;
+            if (secondHand) secondHand.style.transform = `rotate(${secondDegrees}deg)`;
+
+            // Date and details
+            const days = ['الأحد / Sun', 'الإثنين / Mon', 'الثلاثاء / Tue', 'الأربعاء / Wed', 'الخميس / Thu', 'الجمعة / Fri', 'السبت / Sat'];
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            const dateElement = document.getElementById(`date-${index}`);
+            if (dateElement) {
+                dateElement.textContent = `${tzTime.getDate()} ${months[tzTime.getMonth()]}`;
+            }
+
+            const dayElement = document.getElementById(`day-${index}`);
+            if (dayElement) {
+                dayElement.textContent = days[tzTime.getDay()];
+            }
+
+            // UTC Offset
+            const offsetElement = document.getElementById(`offset-${index}`);
+            if (offsetElement) {
+                const offset = getUTCOffset(timezone);
+                offsetElement.textContent = offset;
+            }
+
+            // Week number
+            const weekElement = document.getElementById(`week-${index}`);
+            if (weekElement) {
+                const weekNum = getWeekNumber(tzTime);
+                weekElement.textContent = `W${weekNum}`;
+            }
+        }
+
+        function pad(num) {
+            return String(num).padStart(2, '0');
+        }
+
+        function formatTimezoneName(tz) {
+            return tz.replace(/_/g, ' ').split('/').pop();
+        }
+
+        function getUTCOffset(timezone) {
+            const now = new Date();
+            const utcTime = new Date(now.toLocaleString('en-US', { timeZone: 'UTC' }));
+            const tzTime = new Date(now.toLocaleString('en-US', { timeZone: timezone }));
+            
+            const diffMs = tzTime - utcTime;
+            const diffMins = Math.round(diffMs / 60000);
+            const hours = Math.floor(diffMins / 60);
+            const mins = Math.abs(diffMins % 60);
+
+            const sign = diffMins >= 0 ? '+' : '-';
+            return `UTC ${sign}${pad(Math.abs(hours))}:${pad(mins)}`;
+        }
+
+        function getWeekNumber(date) {
+            const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+            const dayNum = d.getUTCDay() || 7;
+            d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+            const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+            return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+        }
+
+        // Console welcome message
+        console.log('%c🕐 مرحباً بك في ساعة سوسن أروما العالمية!', 'color: #FFA500; font-size: 16px; font-weight: bold;');
+        console.log('%cWelcome to Sawsan Aroma Global Clock!', 'color: #8B4513; font-size: 14px;');
+    </script>
+</body>
+</html>
