@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر سوسن أروما كوفي - Sawsan Aroma Coffee</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <span class="logo-icon">☕</span>
+                <span class="logo-text">سوسن أروما</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#products">منتجاتنا</a></li>
+                <li><a href="#about">عن المتجر</a></li>
+                <li><a href="#contact">تواصل معنا</a></li>
+                <li><a href="#cart" class="cart-icon">🛒 السلة</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">مرحباً بك في سوسن أروما كوفي</h1>
+            <p class="hero-subtitle">تجربة القهوة الفاخرة من حول العالم</p>
+            <button class="cta-button">استكشف المنتجات</button>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=500&h=500&fit=crop" alt="قهوة فاخرة">
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-title">
+            <h2>منتجاتنا المميزة</h2>
+            <p>اختر من أجود أنواع القهوة العالمية</p>
+        </div>
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b3f4?w=300&h=300&fit=crop" alt="قهوة إسبريسو">
+                    <div class="badge">جديد</div>
+                </div>
+                <div class="product-info">
+                    <h3>قهوة إسبريسو الأصلية</h3>
+                    <p class="product-description">قهوة إسبريسو عالية الجودة من إيطاليا</p>
+                    <div class="rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="reviews">(245 تقييم)</span>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price">45 ريال</span>
+                        <button class="add-to-cart">أضف للسلة</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1509785307050-d4066910ec1e?w=300&h=300&fit=crop" alt="قهوة عربية">
+                    <div class="badge hot">مشهور</div>
+                </div>
+                <div class="product-info">
+                    <h3>القهوة العربية الفاخرة</h3>
+                    <p class="product-description">قهوة عربية أصلية محضرة بالهيل والزعفران</p>
+                    <div class="rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="reviews">(189 تقييم)</span>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price">35 ريال</span>
+                        <button class="add-to-cart">أضف للسلة</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1510812431401-41d2cab2707d?w=300&h=300&fit=crop" alt="قهوة كولومبيا">
+                </div>
+                <div class="product-info">
+                    <h3>قهوة كولومبيا الجبلية</h3>
+                    <p class="product-description">حبوب قهوة كولومبية مختارة بعناية</p>
+                    <div class="rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="reviews">(156 تقييم)</span>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price">50 ريال</span>
+                        <button class="add-to-cart">أضف للسلة</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b3f4?w=300&h=300&fit=crop" alt="القهوة التركية">
+                </div>
+                <div class="product-info">
+                    <h3>القهوة التركية الأصلية</h3>
+                    <p class="product-description">قهوة تركية ناعمة جداً بنكهات فريدة</p>
+                    <div class="rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="reviews">(234 تقييم)</span>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price">40 ريال</span>
+                        <button class="add-to-cart">أضف للسلة</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=300&h=300&fit=crop" alt="القهوة الفرنسية">
+                    <div class="badge discount">خصم 15%</div>
+                </div>
+                <div class="product-info">
+                    <h3>القهوة الفرنسية المحمصة</h3>
+                    <p class="product-description">قهوة فرنسية فاخرة بمحمصة خاصة</p>
+                    <div class="rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="reviews">(198 تقييم)</span>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price"><del>55</del> 47 ريال</span>
+                        <button class="add-to-cart">أضف للسلة</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1442512595331-e89e90e7d4b0?w=300&h=300&fit=crop" alt="مزيج فريد">
+                </div>
+                <div class="product-info">
+                    <h3>مزيج سوسن الخاص</h3>
+                    <p class="product-description">مزيج حصري من أفضل حبوب العالم</p>
+                    <div class="rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="reviews">(312 تقييم)</span>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price">60 ريال</span>
+                        <button class="add-to-cart">أضف للسلة</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-content">
+                <h2>عن متجر سوسن أروما كوفي</h2>
+                <p>متجرنا متخصص في توفير أجود أنواع القهوة من جميع أنحاء العالم. لدينا خبرة تزيد عن 10 سنوات في عالم القهوة الفاخرة.</p>
+                <p>نقدم لعملائنا الكرام جودة عالية وأسعار منافسة، مع ضمان الرضا التام على كل منتج.</p>
+                <div class="about-features">
+                    <div class="feature">
+                        <span class="feature-icon">🚚</span>
+                        <h4>توصيل سريع</h4>
+                        <p>توصيل في نفس اليوم</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">💯</span>
+                        <h4>ضمان الجودة</h4>
+                        <p>أصلي 100%</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">🛡️</span>
+                        <h4>آمن وموثوق</h4>
+                        <p>دفع آمن</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1495474472645-4d71bcdd2085?w=500&h=400&fit=crop" alt="محل القهوة">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <h2>تواصل معنا</h2>
+            <p class="contact-subtitle">نحن هنا لمساعدتك</p>
+            <div class="contact-content">
+                <div class="contact-form">
+                    <form>
+                        <input type="text" placeholder="اسمك" required>
+                        <input type="email" placeholder="بريدك الإلكتروني" required>
+                        <textarea placeholder="رسالتك" rows="5" required></textarea>
+                        <button type="submit" class="submit-btn">إرسال الرسالة</button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <span class="info-icon">📍</span>
+                        <div>
+                            <h4>الموقع</h4>
+                            <p>الرياض، المملكة العربية السعودية</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">📞</span>
+                        <div>
+                            <h4>الهاتف</h4>
+                            <p>+966 50 123 4567</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">✉️</span>
+                        <div>
+                            <h4>البريد الإلكتروني</h4>
+                            <p>info@sawsanaroma.com</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">🕐</span>
+                        <div>
+                            <h4>ساعات العمل</h4>
+                            <p>يومياً: 9:00 صباحاً - 11:00 مساءً</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>عن المتجر</h4>
+                <ul>
+                    <li><a href="#">من نحن</a></li>
+                    <li><a href="#">تاريخنا</a></li>
+                    <li><a href="#">الرؤية والرسالة</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>المنتجات</h4>
+                <ul>
+                    <li><a href="#">القهوة العربية</a></li>
+                    <li><a href="#">القهوة الأوروبية</a></li>
+                    <li><a href="#">المزاريع الخاصة</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>تابعنا</h4>
+                <div class="social-links">
+                    <a href="#" class="social-icon">👍</a>
+                    <a href="#" class="social-icon">📷</a>
+                    <a href="#" class="social-icon">🐦</a>
+                    <a href="#" class="social-icon">📱</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 سوسن أروما كوفي. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
