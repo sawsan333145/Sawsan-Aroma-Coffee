@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سوسن أروما كوفي | متجر البن</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>☕ سوسن أروما كوفي</h1>
+    <p>نكهة تُحاكي الروح ✨</p>
+</header>
+
+<nav>
+    <a href="#home">الرئيسية</a>
+    <a href="#products">المنتجات</a>
+    <a href="#about">من نحن</a>
+    <a href="#contact">تواصل معنا</a>
+    <a href="javascript:void(0)" onclick="toggleCart()">🛒 سلة المشتريات (<span id="cartCount">0</span>)</a>
+</nav>
+
+<!-- Shopping Cart Modal -->
+<div id="cartModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="toggleCart()">&times;</span>
+        <h2>🛒 سلة المشتريات</h2>
+        <div id="cartItems"></div>
+        <div class="cart-total">
+            <h3>الإجمالي: <span id="totalPrice">0</span> ريال</h3>
+        </div>
+        <button class="checkout-btn" onclick="checkout()">إتمام الشراء</button>
+        <button class="clear-cart-btn" onclick="clearCart()">تفريغ السلة</button>
+    </div>
+</div>
+
+<section id="home" class="hero">
+    <h2>أهلاً بك في متجرنا</h2>
+    <p>أفضل أنواع البن الطبيعي والتغليف الفاخر</p>
+    <a href="#products" class="cta-button">تصفح المنتجات</a>
+</section>
+
+<section id="products">
+    <h2>✨ منتجاتنا المميزة</h2>
+    <div class="products" id="productsContainer">
+        <!-- Products will be loaded here -->
+    </div>
+</section>
+
+<section id="about">
+    <h2>من نحن</h2>
+    <p>سوسن أروما كوفي مشروع تعبئة وتغليف البن الطبيعي، نسعى لتقديم أفضل جودة مع لمسة من الفخامة والراحة.</p>
+    <div class="features">
+        <div class="feature">
+            <i class="fas fa-leaf"></i>
+            <h3>طبيعي 100%</h3>
+            <p>بن طبيعي بدون إضافات</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-crown"></i>
+            <h3>جودة فاخرة</h3>
+            <p>أفضل المحاصيل العالمية</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-shipping-fast"></i>
+            <h3>توصيل سريع</h3>
+            <p>وصول آمن إلى بابك</p>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <h2>تواصل معنا</h2>
+    <div class="contact-info">
+        <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <p><strong>هاتف:</strong> +201234567890</p>
+        </div>
+        <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <p><strong>بريد:</strong> info@sawsanaroma.com</p>
+        </div>
+        <div class="contact-item">
+            <i class="fab fa-whatsapp"></i>
+            <p><a href="https://wa.me/201234567890" target="_blank">تواصل عبر واتساب</a></p>
+        </div>
+    </div>
+    <form class="contact-form" id="contactForm">
+        <input type="text" placeholder="الاسم" required>
+        <input type="email" placeholder="البريد الإلكتروني" required>
+        <textarea placeholder="رسالتك" rows="5" required></textarea>
+        <button type="submit">إرسال</button>
+    </form>
+</section>
+
+<footer>
+    <p>© ٢٠٢٦ سوسن أروما كوفي — جميع الحقوق محفوظة</p>
+    <p>تم التطوير بواسطة <strong>Sawsan Aroma Coffee Team</strong> ☕</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
